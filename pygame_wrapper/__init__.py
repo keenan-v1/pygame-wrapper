@@ -29,12 +29,15 @@ class Game:
     def loop(self) -> bool:
         pygame.display.update()
         self.clock.tick(self.fps)
-        for evt in pygame.event.get():
-            if evt.type == pygame.QUIT:
-                return False
-            if evt.type in self.listeners:
-                for listener in self.listeners[evt.type]:
-                    listener(evt)
+        if pygame.event.peek(eventtype=pygame.QUIT):
+            return False
+        if len(self.listeners) != 0:
+            for evt in pygame.event.get():
+                if evt.type == pygame.QUIT:
+                    return False
+                if evt.type in self.listeners:
+                    for listener in self.listeners[evt.type]:
+                        listener(evt)
         return True
 
     def print(self, font_name: str, sz_pt: int, text: str, text_color: tuple[int, int, int], point: tuple[int, int],
