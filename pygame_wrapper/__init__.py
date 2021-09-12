@@ -1,6 +1,7 @@
 from collections import Callable
 
 import pygame
+
 from . import color
 
 
@@ -17,9 +18,9 @@ class Game:
         self.screen = pygame.display.set_mode((screen_width, screen_height))
         self.clock = pygame.time.Clock()
         self.screen.fill(color.BLACK)
-        self.listeners: dict[int, list[Callable[[pygame.event.Event], None]]] = {}
+        self.listeners: dict[int, list[Callable[[Event], None]]] = {}
 
-    def listen(self, event_type: int, f: Callable[[pygame.event.Event], None]):
+    def listen(self, event_type: int, f: Callable[[Event], None]):
         if event_type not in self.listeners:
             self.listeners[event_type] = []
         if f not in self.listeners[event_type]:

@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-from pygame_wrapper import Game
-from pygame_wrapper import color
-import pygame
+from pygame_wrapper import Game, event, color
 
 
 def game_logic(game: Game, pressed: list[str]) -> None:
@@ -16,13 +14,13 @@ def main() -> None:
 
     keys_held: list[str] = []
 
-    def on_keyup(evt: pygame.event.Event):
+    def on_keyup(evt: event.Event):
         keys_held.remove(evt.unicode)
         if len(keys_held) == 0:
             game.screen.fill(color.BLACK)
 
-    game.listen(pygame.KEYUP, on_keyup)
-    game.listen(pygame.KEYDOWN, lambda evt: keys_held.append(evt.unicode))
+    game.listen(event.KEYUP, on_keyup)
+    game.listen(event.KEYDOWN, lambda evt: keys_held.append(evt.unicode))
     while game.loop():
         game_logic(game, list(dict.fromkeys(keys_held)))
 
