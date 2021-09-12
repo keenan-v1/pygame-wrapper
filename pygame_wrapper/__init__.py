@@ -7,15 +7,18 @@ from . import color, event
 
 class Game:
     def __init__(self, screen_width: int = 640, screen_height: int = 480, title: str = "My Game", icon: str = None,
-                 sound: bool = False, fps: int = 30) -> None:
+                 sound: bool = False, fps: int = 30, resizeable: bool = False) -> None:
         self.fps = fps
         pygame.init()
+        self.resizeable = resizeable
+        self.title = title
+        self.screen_flags = pygame.RESIZABLE if resizeable else 0
+        self.screen = pygame.display.set_mode((screen_width, screen_height), self.screen_flags)
         pygame.display.set_caption(title)
         if icon is not None:
             pygame.display.set_icon(pygame.image.load(icon))
         if sound:
             pygame.mixer.init()
-        self.screen = pygame.display.set_mode((screen_width, screen_height))
         self.clock = pygame.time.Clock()
         self.screen.fill(color.BLACK)
         self.listeners: dict[int, list[Callable[[event.Event], None]]] = {}
@@ -46,6 +49,10 @@ class Game:
         font = pygame.font.SysFont(font_name, sz_pt)
         line = font.render(text, antialias, text_color)
         self.screen.blit(line, point)
+
+    def resize(self, size: tuple[int, int]):
+        self.screen = pygame.display.set_mode(size, self.screen_flags)
+        pygame.display.set_caption(self.title)
 
     @staticmethod
     def events(event_type: int = None) -> list[pygame.event.Event]:

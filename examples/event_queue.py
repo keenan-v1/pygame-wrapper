@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+# Note: If you've pip installed the pygame_wrapper package, you do not need a try/except.
 try:
     from pygame_wrapper import Game, event, color
 except ImportError:
