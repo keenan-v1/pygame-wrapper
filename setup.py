@@ -22,7 +22,11 @@ VERSION = '0.1.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'git+https://github.com/pygame/pygame',
+    'pygame',
+]
+
+DEPENDENCY_LINKS = [
+    'git+https://github.com/pygame/pygame#egg=pygame'
 ]
 
 # What packages are optional?
@@ -111,6 +115,7 @@ setup(
     #     'console_scripts': ['mycli=mymodule:cli'],
     # },
     install_requires=REQUIRED,
+    dependency_links=DEPENDENCY_LINKS,
     extras_require=EXTRAS,
     include_package_data=True,
     license='MIT',
