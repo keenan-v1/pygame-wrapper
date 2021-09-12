@@ -1,4 +1,4 @@
-#pygame-wrapper
+# pygame-wrapper
 
 This is a basic wrapper around the `pygame` python library.
 
