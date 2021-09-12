@@ -46,4 +46,3 @@ class Game:
     @staticmethod
     def events(event_type: int = None) -> list[pygame.event.Event]:
         return pygame.event.get(eventtype=event_type)
-

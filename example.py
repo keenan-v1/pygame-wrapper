@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from game import Game
-from game import color
+from pygame_wrapper import Game
+from pygame_wrapper import color
 import pygame
 
 
@@ -16,7 +16,7 @@ def main() -> None:
 
     keys_held: list[str] = []
 
-    def on_keyup(evt: pygame):
+    def on_keyup(evt: pygame.event.Event):
         keys_held.remove(evt.unicode)
         if len(keys_held) == 0:
             game.screen.fill(color.BLACK)

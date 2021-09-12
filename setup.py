@@ -12,7 +12,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'pygame-wrapper'
+NAME = 'pygame_wrapper'
 DESCRIPTION = 'Simple wrapper for pygame.'
 URL = 'https://github.com/keenan-v1/pygame-wrapper'
 EMAIL = 'jonathan@wantsmore.coffee'
