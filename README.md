@@ -1,6 +1,6 @@
 # pygame-wrapper
 
-This is a basic wrapper around the `pygame` python library.
+This is a basic wrapper around the `pygame` python library, as well as integrating the `pygame_gui` library.
 
 Don't use it yet. It's just me messing around. 😊
 
@@ -21,3 +21,7 @@ cd examples
 ```shell
 python3 -m pip install --upgrade git+https://github.com/keenan-v1/pygame-wrapper
 ```
+
+## Links
+- [Pygame](https://www.pygame.org)
+- [Pygame GUI](https://github.com/MyreMylar/pygame_gui)
