@@ -21,12 +21,15 @@ def main() -> None:
     game.listen(event.KEYUP, on_keyup)
     game.listen(event.KEYDOWN, lambda evt: keys_held.append(evt.unicode))
 
-    while game.loop():
+    def draw():
         keys = "".join(list(dict.fromkeys(keys_held)))
         if keys != "":
             game.screen.fill(color.GREEN)
             game.print("monospace", 35, keys, color.BLACK, (10, 10))
+    game.on_draw(draw)
 
+    while game.loop():
+        pass
 
 if __name__ == "__main__":
     main()

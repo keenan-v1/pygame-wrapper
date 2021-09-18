@@ -4,16 +4,16 @@
 import pygame
 
 try:
-    from pygame_wrapper import Game, event, color, sprites
+    from pygame_wrapper import Game, event, color, sprites, keys
 except ImportError:
     import sys
     sys.path.append("..")
-    from pygame_wrapper import Game, event, color, sprites
+    from pygame_wrapper import Game, event, color, sprites, keys
 
 
 class App(Game):
     def __init__(self):
-        super().__init__(title="Sprite Demo", screen_width=800, screen_height=600)
+        super().__init__(title="Sprite Demo", screen_width=800, screen_height=600, background_color=(128, 128, 128))
         self.sprite_sheet = sprites.Sheet("data/sprites.png")
         xy = (self.sprite_sheet.size()[0]-1, 0)
         self.sprite_list = self.sprite_sheet.slice_sheet(3, 4, 4, 8, self.sprite_sheet.color_at(*xy))
@@ -22,6 +22,13 @@ class App(Game):
     def scale_up(self):
         for i in range(len(self.sprite_list)):
             new_sprite = pygame.Surface((self.sprite_list[i].get_size()[0]*2, self.sprite_list[i].get_size()[1]*2))
+            new_sprite.set_colorkey(self.sprite_list[i].get_colorkey())
+            pygame.transform.scale(self.sprite_list[i], new_sprite.get_size(), new_sprite)
+            self.sprite_list[i] = new_sprite
+
+    def scale_down(self):
+        for i in range(len(self.sprite_list)):
+            new_sprite = pygame.Surface((self.sprite_list[i].get_size()[0]/2, self.sprite_list[i].get_size()[1]/2))
             new_sprite.set_colorkey(self.sprite_list[i].get_colorkey())
             pygame.transform.scale(self.sprite_list[i], new_sprite.get_size(), new_sprite)
             self.sprite_list[i] = new_sprite
@@ -43,11 +50,12 @@ class App(Game):
 def main() -> None:
     game = App()
 
-    game.listen(event.KEYDOWN, lambda _: game.scale_up())
+    game.map_key(keys.KEY_EQUALS, lambda _: game.scale_up())
+    game.map_key(keys.KEY_MINUS, lambda _: game.scale_down())
+    game.on_draw(game.draw)
 
     while game.loop():
-        game.screen.fill((128, 128, 128, 0))
-        game.draw()
+        pass
 
 
 if __name__ == "__main__":

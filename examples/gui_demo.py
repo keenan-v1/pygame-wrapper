@@ -5,11 +5,11 @@ import collections
 from typing import Optional
 
 try:
-    from pygame_wrapper import Game, event, color, gui, pygame
+    from pygame_wrapper import Game, event, color, gui, pygame, keys
 except ImportError:
     import sys
     sys.path.append("..")
-    from pygame_wrapper import Game, event, color, gui, pygame
+    from pygame_wrapper import Game, event, color, gui, pygame, keys
 
 
 class DemoWindow(gui.elements.UIWindow):
@@ -26,21 +26,18 @@ class DemoApp(Game):
     def __init__(self):
         super().__init__(gui=True, title="GUI Demo", theme_path='./data/gui_demo_theme.json')
 
-        self.listen(event.KEYDOWN, self.on_keydown())
-        self.listen_gui(event.UI_WINDOW_CLOSE, lambda evt: self.clear_window())
-        self.on_draw(lambda: self.screen.fill(color.BLACK))
+        self.map_key(keys.KEY_F1, lambda _: self.open_window())
+        self.listen_gui(event.UI_WINDOW_CLOSE, lambda _: self.clear_window())
         self.window: Optional[gui.UIManager] = None
 
-    def on_keydown(self) -> collections.Callable[[event.Event], None]:
-        def handler(evt: event.Event) -> None:
-            if evt.key == pygame.K_F1 and self.window is None:
-                self.window = DemoWindow(self.manager)
-        return handler
+    def open_window(self) -> None:
+        if self.window is None:
+            self.window = DemoWindow(self.manager)
 
-    def clear_window(self):
+    def clear_window(self) -> None:
         self.window = None
 
-    def run(self):
+    def run(self) -> None:
         while self.loop():
             pass
 

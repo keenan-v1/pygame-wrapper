@@ -22,7 +22,7 @@ class Sheet:
 
         Keyword arguments:
             rectangle -- Either a tuple[int,int,int,int] or a pygame.rect.Rect. It is the area to load from the sheet.
-            color_key -- Sets the color key for the image (the color which represents transparency). Default: none
+            color_key -- Sets the color keys for the image (the color which represents transparency). Default: none
                       -- Note: a color_key value of -1 pulls the color_key from the top left of the image.
         """
         if type(rectangle) is not pygame.rect.Rect:
@@ -41,7 +41,7 @@ class Sheet:
 
         Keyword arguments:
             rectangles -- Either a tuple[int,int,int,int] or a pygame.rect.Rect. It is the area to load from the sheet.
-            color_key -- Sets the color key for the image (the color which represents transparency). Default: none
+            color_key -- Sets the color keys for the image (the color which represents transparency). Default: none
                       -- Note: a color_key value of -1 pulls the color_key from the top left of the image.
         """
         return [self.sprite_at(rectangle, color_key) for rectangle in rectangles]
@@ -53,7 +53,7 @@ class Sheet:
         Keyword arguments:
             rectangle -- A tuple containing the points of the rectangle.
             image_count -- The number of images to expect in the strip.
-            color_key -- Sets the color key for the image (the color which represents transparency). Default: none
+            color_key -- Sets the color keys for the image (the color which represents transparency). Default: none
                       -- Note: a color_key value of -1 pulls the color_key from the top left of the image.
         """
         rectangles = [(rectangle[0]+rectangle[2]*x, rectangle[1], rectangle[2], rectangle[3])
@@ -77,7 +77,7 @@ class Sheet:
             cols -- number of columns to slice the sheet into.
             margin -- either a tuple[x,y] of margin, or an integer to use for both.
             padding -- either a tuple[x,y] of padding, or an integer to use for both.
-            color_key -- Sets the color key for the image (the color which represents transparency). Default: none
+            color_key -- Sets the color keys for the image (the color which represents transparency). Default: none
                       -- Note: a color_key value of -1 pulls the color_key from the top left of the image.
         """
         margin_x = margin[0] if type(margin) == tuple else margin

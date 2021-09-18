@@ -2,11 +2,11 @@
 
 # Note: If you've pip installed the pygame_wrapper package, you do not need a try/except.
 try:
-    from pygame_wrapper import Game, event, color
+    from pygame_wrapper import Game, event
 except ImportError:
     import sys
     sys.path.append("..")
-    from pygame_wrapper import Game, event, color
+    from pygame_wrapper import Game, event
 
 
 def main() -> None:
