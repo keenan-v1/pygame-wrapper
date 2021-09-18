@@ -15,7 +15,7 @@ except ImportError:
 class DemoWindow(gui.elements.UIWindow):
     def __init__(self, manager):
         super().__init__(
-            pygame.Rect((200, 50), (420, 520)),
+            pygame.Rect((20, 50), (300, 200)),
             manager,
             window_display_title="Demo Window",
             object_id="#demo_window"

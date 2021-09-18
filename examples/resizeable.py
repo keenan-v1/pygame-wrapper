@@ -3,6 +3,8 @@
 # Note: If you've pip installed the pygame_wrapper package, you do not need a try/except.
 from collections import Callable
 
+import pygame
+
 try:
     from pygame_wrapper import Game, event, color
 except ImportError:
@@ -19,7 +21,7 @@ def on_resize(game: Game) -> Callable[[event.Event], None]:
 
 
 def main() -> None:
-    game = Game(title="Resizeable Demo", resizeable=True)
+    game = Game(title="Resizeable Demo", screen_flags=pygame.RESIZABLE)
     keys_held: list[str] = []
 
     def on_keyup(evt: event.Event):
